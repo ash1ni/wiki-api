@@ -52,6 +52,18 @@ app.post("/articles", (req,res)=>{
 
 } )
 
+app.delete("/articles", (req,res)=>{
+    Article.deleteMany((err)=>{
+        if(err){
+            res.send(err)
+
+        }else{
+            res.send("successfully deleted all articles")
+        }
+    })
+    
+})
+
 
 app.listen(3000, ()=>{
     console.log('server started on port 3000')
