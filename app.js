@@ -109,7 +109,20 @@ app.route("/articles/:articleTitle")
         }
 
     )
-});
+})
+
+.delete((req,res)=>{
+    Article.deleteOne(
+        {title: req.params.articleTitle},
+        function(err){
+            if(!err){
+                res.send("Successfully deleted corresponding article")
+            }else{
+                res.send(err)
+            }
+        }
+    )
+})
 
 
 
