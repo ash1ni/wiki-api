@@ -22,7 +22,8 @@ const articleSchema = {
 
 const Article = mongoose.model("Article", articleSchema)
 
-app.get("/articles", function(req,res){
+app.route("/articles")
+.get(function(req,res){
     Article.find((err, foundArticles)=>{
         if(err){
             res.send(err)
@@ -34,8 +35,7 @@ app.get("/articles", function(req,res){
 
     })
 })
-
-app.post("/articles", (req,res)=>{
+.post((req,res)=>{
    
    const newArticle = new Article({
     title: req.body.title,
@@ -50,9 +50,8 @@ app.post("/articles", (req,res)=>{
    })
     
 
-} )
-
-app.delete("/articles", (req,res)=>{
+})
+.delete((req,res)=>{
     Article.deleteMany((err)=>{
         if(err){
             res.send(err)
@@ -62,7 +61,8 @@ app.delete("/articles", (req,res)=>{
         }
     })
     
-})
+});
+
 
 
 app.listen(3000, ()=>{
