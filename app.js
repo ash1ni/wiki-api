@@ -81,7 +81,7 @@ app.route("/articles/:articleTitle")
 })
 
 .put((req,res)=>{
-    Article.updateOne(
+    Article.updateMany(
         {title: req.params.articleTitle},
         {title: req.body.title, content: req.body.content},
         //{overwrite:true},
@@ -95,6 +95,20 @@ app.route("/articles/:articleTitle")
             
 
         })
+})
+.patch((req,res)=>{
+    Article.updateMany(
+        {title: req.params.articleTitle},
+        {$set: req.body},
+        function(err){
+            if(!err){
+                res.send("Successfully updated article")
+            }else{
+                res.send(err)
+            }
+        }
+
+    )
 });
 
 
